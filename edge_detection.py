@@ -9,7 +9,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-img = cv2.imread('kobe.jpg',0)
+img = cv2.imread('kobe.jpg',0)#place image of your choice here
 edges = cv2.Canny(img,25,500)
 
 plt.subplot(121),plt.imshow(img,cmap = 'gray')
