@@ -60,16 +60,16 @@ def recognize_speech_from_mic(recognizer, microphone):
 
 if __name__ == "__main__":
     # set the list of words, maxnumber of guesses, and prompt limit
-    WORDS = ["Expelliarmus", "wingardium levoisa", "catfish", "sesame", "wang"]
-    NUM_GUESSES = 3
-    PROMPT_LIMIT = 5
+    WORDS = ["Expelliarmus", "wingardium leviosa", "catfish", "sesame", "wang"]
+    NUM_GUESSES = 1
+    PROMPT_LIMIT = 1
 
     # create recognizer and mic instances
     recognizer = sr.Recognizer()
     microphone = sr.Microphone()
 
-    # get a random word from the list
-    word = random.choice(WORDS)
+    # set the correct word
+    word = 'Expelliarmus'
 
     # format the instructions string
     instructions = (
@@ -78,8 +78,8 @@ if __name__ == "__main__":
         "You have {n} tries.\n"
     ).format(words=', '.join(WORDS), n=NUM_GUESSES)
 
-    # show instructions and wait 3 seconds before starting the game
-    print(instructions)
+    # game start
+    #print(instructions)
     time.sleep(1)
 
     for i in range(NUM_GUESSES):
@@ -89,8 +89,8 @@ if __name__ == "__main__":
         # if no transcription returned and API request failed, break
         #     loop and continue
         # if API request succeeded but no transcription was returned,
-        #     re-prompt the user to say their guess again. Do this up
-        #     to PROMPT_LIMIT times
+        #     we treat it as a fail, since PROMPT_LIMIT is set to 1
+        #     
         for j in range(PROMPT_LIMIT):
             print('Guess {}. Go!'.format(i+1))
             guess = recognize_speech_from_mic(recognizer, microphone)
@@ -102,11 +102,11 @@ if __name__ == "__main__":
 
         # if there was an error, stop the game
         if guess["error"]:
-            print("ERROR: {}".format(guess["error"]))
+            print(0)
             break
 
-        # show the user the transcription
-        print("You said: {}".format(guess["transcription"]))
+        # debug: show what user said
+        #print("You said: {}".format(guess["transcription"]))
 
         # determine if guess is correct and if any attempts remain
         guess_is_correct = guess["transcription"].lower() == word.lower()
@@ -116,12 +116,12 @@ if __name__ == "__main__":
         # if not, repeat the loop if user has more attempts
         # if no attempts left, the user loses the game
         if guess_is_correct:
-            print("Correct! You win!".format(word))
+            print(1)
             break
         elif user_has_more_attempts:
             print("Incorrect. Try again.\n")
         else:
-            print("Sorry, you lose!\nI was thinking of '{}'.".format(word))
+            print(0)
             break
 
 
