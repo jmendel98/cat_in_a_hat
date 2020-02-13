@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[3]:
+# In[10]:
 
 
 import random
@@ -10,6 +10,7 @@ import time
 #pip install pyaudio
 import speech_recognition as sr
 
+#returns 1 or 0. 1 => word detected matches inputted spell. 0 => fail
 def speech_spell(spell):
     def recognize_speech_from_mic(recognizer, microphone):
         """Transcribe speech from recorded from `microphone`.
@@ -80,7 +81,7 @@ def speech_spell(spell):
     #     ).format(words=', '.join(WORDS), n=NUM_GUESSES)
 
         #print(instructions)
-        time.sleep(1)
+        #time.sleep(1)
 
         for i in range(NUM_GUESSES):
             # get the guess from the user
@@ -92,13 +93,13 @@ def speech_spell(spell):
             #     we treat it as a fail, since PROMPT_LIMIT is set to 1
             #    
             for j in range(PROMPT_LIMIT):
-                print('Guess {}. Go!'.format(i+1))
+                #print('Guess {}. Go!'.format(i+1))
                 guess = recognize_speech_from_mic(recognizer, microphone)
                 if guess["transcription"]:
                     break
                 if not guess["success"]:
                     break
-                print("Didn't catch that. Try again\n")
+                #print("Didn't catch that. Try again\n")
 
             # if there was an error, stop the game
             if guess["error"]:
@@ -117,17 +118,17 @@ def speech_spell(spell):
             # if not, repeat the loop if user has more attempts
             # if no attempts left, the user loses the game
             if guess_is_correct:
-                print(1)
+                #print(1)
                 return 1
                 break
             elif user_has_more_attempts:
                 print("Incorrect. Try again.\n")
             else:
-                print(0)
+                #print(0)
                 return 0
                 break
                 
-speech_spell('hello')
+#speech_spell('hello')
 
 
 # In[ ]:
