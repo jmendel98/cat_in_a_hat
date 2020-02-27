@@ -118,20 +118,14 @@ def speech_spell(spell):
             # if not, repeat the loop if user has more attempts
             # if no attempts left, the user loses the game
             if guess_is_correct:
-                #print(1)
                 return 1
                 break
-            elif user_has_more_attempts:
-                print("Incorrect. Try again.\n")
+#             elif user_has_more_attempts:
+#                 print("Incorrect. Try again.\n")
             else:
-                #print(0)
                 return 0
                 break
-                
-#speech_spell('hello')
 
-
-# In[ ]:
 
 
 
