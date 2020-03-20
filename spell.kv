@@ -1,0 +1,510 @@
+#:kivy 1.11.1
+<SpellGame>:
+
+	display_area: game_display
+	
+	BoxLayout:
+		size: self.parent.size
+		pos: self.parent.pos
+		orientation: 'vertical'
+		id: game_display
+
+<StatusBar>:
+
+	my_health_label: m_health
+	opp_health_label: o_health
+	round_number_label: r_num
+	location_label: location
+	size_hint: 1,0.2
+	
+	
+	canvas:
+        Rectangle:
+            pos: 0, self.top - self.height
+            size: self.width, 6
+
+	
+    Label:
+        font_size: 20 
+        center_x: self.parent.width / 8
+        top: self.parent.top
+        text: "My health:"
+        
+    Label:
+        font_size: 20 
+        center_x: self.parent.width * 7 / 8
+        top: self.parent.top
+        text: "Opponent health:"
+		
+	Label:
+		id: m_health
+		font_size: 25
+		center_x: self.parent.width / 8
+		top: self.parent.top - 30
+		text: "10"
+		
+	Label:
+		id: o_health
+		font_size: 25
+		center_x: self.parent.width * 7 / 8
+		top: self.parent.top - 30
+		text: "10"
+	
+	Label: 
+		font_size: 25
+		center_x: self.parent.width/2
+		top: self.parent.top 
+		text: "Round Number: "
+		
+	Label:
+		font_size: 25
+		center_x: self.parent.width/2
+		top: self.parent.top - 30
+		text: "Current Location: "
+		
+	Label:
+		id: r_num
+		font_size: 25
+		center_x: self.parent.width * 0.65
+		top: self.parent.top
+		text: "1"
+		
+	Label:
+		id: location
+		font_size: 25
+		center_x: root.width * 0.65
+		top: root.top - 30 
+		text: "1"
+
+<RoundBegin>:
+	
+	round_label: m_round
+	size_hint: 1,0.8
+	
+	Label:
+		font_size: 40
+		text: "START OF ROUND"
+		center_x: self.parent.center_x
+		center_y: self.parent.top - 0.35 * self.parent.height
+		
+		
+	Label:
+		id:m_round
+		font_size: 60
+		center_x: self.parent.center_x
+		center_y: self.parent.top - 0.65 * self.parent.height
+		text: "1"
+		
+		
+		
+<moveNow>:
+
+	size_hint: 1,0.8
+	
+	Label:
+		font_size: 40
+		text: "Move one tile and"
+		center_x: self.parent.center_x
+		center_y: self.parent.top - 0.35 * self.parent.height
+		
+		
+	Label:
+		id: m_round
+		font_size: 40
+		center_x: self.parent.center_x
+		center_y: self.parent.top - 0.65 * self.parent.height
+		text: "press the button"
+		
+<takingPic>:
+
+	size_hint: 1,0.8
+	
+	Label:
+		font_size: 40
+		text: "Taking picture. . ."
+		center_x: self.parent.center_x
+		center_y: self.parent.top - 0.5 * self.parent.height
+		
+		
+<locUpdated>:
+
+	size_hint: 1,0.8
+	
+	Label:
+		font_size: 40
+		text: "Location updated!"
+		center_x: self.parent.center_x
+		center_y: self.parent.top - 0.5 * self.parent.height
+		
+		
+<spellAttribute>:
+	
+	stat_list: quad
+	
+	GridLayout:
+		id: quad
+		size: self.parent.size
+		pos: self.parent.pos
+		cols: 2
+		
+		
+<attackStat>:
+
+	stat_label: stat
+	
+	canvas:
+		Rectangle:
+			source: 'attack.png'
+			size: 50,50
+			pos: self.right - 2*self.width/3, self.top - self.height/2 - 25
+			
+			
+	Label:
+		id:stat
+		font_size: 30
+		center_x: self.parent.right - self.parent.width/3
+		center_y: self.parent.top - self.parent.height/2
+			
+<defenseStat>:
+
+	stat_label: stat
+	
+	canvas:
+		Rectangle:
+			source: 'defense.png'
+			size: 50,50
+			pos: self.right - 2*self.width/3, self.top - self.height/2 - 25
+			
+	Label:
+		id:stat
+		font_size: 30
+		center_x: self.parent.right - self.parent.width/3
+		center_y: self.parent.top - self.parent.height/2
+			
+<healStat>:
+
+	stat_label: stat
+	
+	canvas:
+		Rectangle:
+			source: 'heal.png'
+			size: 50,50
+			pos: self.right - 2*self.width/3, self.top - self.height/2 - 25
+			
+	Label:
+		id:stat
+		font_size: 30
+		center_x: self.parent.right - self.parent.width/3
+		center_y: self.parent.top - self.parent.height/2
+			
+<wildcardStat>:
+
+	stat_label: stat
+	
+	canvas:
+		Rectangle:
+			source: 'wildcard.png'
+			size: 50,50
+			pos: self.right - 2*self.width/3, self.top - self.height/2 - 25
+			
+	Label:
+		id:stat
+		font_size: 30
+		center_x: self.parent.right - self.parent.width/3
+		center_y: self.parent.top - self.parent.height/2
+		
+<spellSelect>:
+
+	spell_grid: three_spells
+	
+	canvas:
+		Rectangle:
+			pos: self.right - 2*self.width/3,self.top - 5*self.height/6
+			size: 5, 2*self.height/3
+		Rectangle:
+			pos: self.right - self.width/3,self.top - 5*self.height/6
+			size: 5, 2*self.height/3
+	
+	Label:
+		font_size: 40
+		text: "Please say your spell choice:"
+		center_y: self.parent.top - 0.05*self.parent.height
+		center_x: self.parent.center_x
+		
+	Label:
+		font_size: 40
+		text: "( red )"
+		center_y: self.parent.top - 0.9*self.parent.height
+		center_x: self.parent.right - 5*self.parent.width/6
+		
+	Label:
+		font_size: 40
+		text: "( green )"
+		center_y: self.parent.top - 0.9*self.parent.height
+		center_x: self.parent.right - self.parent.width/2
+		
+	Label:
+		font_size: 40
+		text: "( blue )"
+		center_y: self.parent.top - 0.9*self.parent.height
+		center_x: self.parent.right - self.parent.width/6
+
+
+		
+	BoxLayout:
+		id: three_spells
+		size: self.parent.size
+		pos: self.parent.pos
+		
+		
+		
+<spellChoice>:
+
+	spell_area: chosen_spell
+	
+	BoxLayout:
+		id: chosen_spell
+		size: self.parent.width/3, self.parent.height
+		pos: self.parent.right - 2*self.parent.width/3 ,self.parent.y
+		
+	Label:
+		font_size: 40
+		text: "You chose this spell"
+		center_y: self.parent.top - 0.05*self.parent.height
+		center_x: self.parent.right - self.parent.width/2
+		
+		
+<getReady>:
+
+	size_hint: 1,0.8
+
+	Label:
+		font_size: 40
+		text: "Get ready to cast!"
+		center_x: self.parent.center_x
+		center_y: self.parent.top - 0.5 * self.parent.height
+		
+		
+<combo>:
+
+	word_label: wrd
+	gest_label: gest
+	cast_results: results
+	
+	Label:
+		id: wrd
+		font_size: 40
+		center_x: self.parent.center_x
+		center_y: self.parent.top - self.parent.height/3
+		
+	Label:
+		id: gest
+		font_size: 40
+		center_x: self.parent.center_x
+		center_y: self.parent.top - 2*self.parent.height/3
+		
+	BoxLayout:
+		orientation: 'vertical'
+		id: results
+		size: self.parent.size
+		pos: self.parent.pos
+		
+<spellCast>:
+
+	combos: combo_order
+	
+	canvas:
+		Rectangle:
+			pos: self.right - 3*self.width/4, self.top - 5*self.height/6
+			size: 5, 2*self.height/3
+		Rectangle:
+			pos: self.right - self.width/2, self.top - 5*self.height/6
+			size: 5, 2*self.height/3
+		Rectangle:
+			pos: self.right - self.width/4, self.top - 5*self.height/6
+			size: 5, 2*self.height/3
+	
+	BoxLayout:
+		orientation: 'horizontal'
+		id: combo_order
+		size: self.parent.size
+		pos: self.parent.pos
+		
+	Label:
+		font_size: 30
+		text: "Press the button to begin gesture recognition; speak to begin voice recognition"
+		center_x: self.parent.center_x
+		center_y: self.parent.top - 0.05*self.parent.height
+		
+<castResult>:
+
+	spell_results: spells
+
+	Label:
+		font_size: 40
+		text: "You cast the spell: "
+		center_x: self.parent.right - 3*self.parent.width/4
+		center_y: self.parent.top - 0.05*self.parent.height
+
+	Label:
+		font_size: 40
+		text: "Your opponent cast the spell: "
+		center_x: self.parent.right - self.parent.width/4
+		center_y: self.parent.top - 0.05*self.parent.height
+		
+	BoxLayout:
+		id: spells
+		size: self.parent.size
+		pos: self.parent.pos
+		
+<wordCorrect>:
+	
+	canvas:
+		Rectangle: 
+			size: 50,50
+			pos: self.right - 0.3*self.width, self.top - 4*self.height/5
+			source: 'correct.png'
+
+<gestCorrect>:
+			
+	canvas:
+		Rectangle:
+			size: 50,50
+			pos: self.right - 0.3*self.width, self.top - 3*self.height/7
+			source: 'correct.png'
+			
+<wordIncorrect>:
+	
+	canvas:
+		Rectangle: 
+			size: 50,50
+			pos: self.right - 0.3*self.width, self.top - 4*self.height/5
+			source: 'incorrect.png'
+		
+<gestIncorrect>:
+			
+	canvas:
+		Rectangle:
+			size: 50,50
+			pos: self.right - 0.3*self.width, self.top - 3*self.height/7
+			source: 'incorrect.png'
+			
+<castSpell>:
+
+	spell_attributes: attributes
+
+	BoxLayout:
+		id: attributes
+		orientation: 'vertical'
+		size: self.parent.size
+		pos: self.parent.pos
+			
+		
+			
+		
+<youWin>:
+
+	Label:
+		font_size: 40
+		center_x: self.parent.center_x
+		center_y: self.parent.center_y
+		text: "You win!!"
+		
+		
+<youLose>:
+
+	Label:
+		font_size: 40
+		center_x: self.parent.center_x
+		center_y: self.parent.center_7
+		text: "You lose..."
+		
+<youDraw>:
+
+	Label:
+		font_size: 40
+		center_x: self.parent.center_x
+		center_y: self.parent.center_y
+		text: "It was a draw."
+		
+<firstCorrect>:
+
+	canvas:
+		Rectangle: 
+			pos: self.right - 3*self.width/4, self.top - self.height/2
+			source: 'correct.png'
+			
+<secondCorrect>:
+
+	canvas:
+		Rectangle: 
+			pos: self.right - 2*self.width/4, self.top - self.height/2
+			source: 'correct.png'
+		
+<thirdCorrect>:
+
+	canvas:
+		Rectangle: 
+			pos: self.right - self.width/4, self.top - self.height/2
+			source: 'correct.png'
+			
+			
+<circleTrain>:
+
+	layout: lay
+
+	Label:
+		font_size: 40
+		center_x: self.parent.center_x
+		center_y: self.parent.top - self.parent.height * 0.05
+		text: "Practice the circle motion three times."
+		
+	BoxLayout:
+		size: self.parent.size
+		pos: self.parent.pos
+		orientation: 'horizontal'
+		id: lay
+
+		
+<twistTrain>:
+
+	layout: lay
+	Label:
+		font_size: 40
+		center_x: self.parent.center_x
+		center_y: self.parent.top - self.parent.height * 0.05
+		text: "Practice the twist motion three times."
+		
+	BoxLayout:
+		size: self.parent.size
+		pos: self.parent.pos
+		orientation: 'horizontal'
+		id: lay
+	
+<upTrain>:
+	layout:lay
+
+	Label:
+		font_size: 40
+		center_x: self.parent.center_x
+		center_y: self.parent.top - self.parent.height * 0.05
+		text: "Practice the up motion three times."
+		
+	BoxLayout:
+		size: self.parent.size
+		pos: self.parent.pos
+		orientation: 'horizontal'
+		id: lay
+		
+<thrustTrain>:
+	layout: lay
+	Label:
+		font_size: 40
+		center_x: self.parent.center_x
+		center_y: self.parent.top - self.parent.height * 0.05
+		text: "Practice the thrust motion three times."
+	BoxLayout:
+		size: self.parent.size
+		pos: self.parent.pos
+		orientation: 'horizontal'
+		id: lay
